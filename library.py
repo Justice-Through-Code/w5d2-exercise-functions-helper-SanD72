@@ -1,4 +1,5 @@
 
+# Eddie Menefee helped me debug for final draft.
 # You are working on a library management system, here are the list books at the library
 
 books = [
@@ -10,6 +11,11 @@ books = [
 # Parameters: Not needed for this function
 # Return: Not needed for this function
 
+def available_books():
+    for book in books:
+       print(book)
+
+#available_books()
 
 # 1.2 TODO: Run the 'available_books' function
 
@@ -18,38 +24,48 @@ print('-----------------------')
 # 1.3 TODO: Create a function named 'check_out' that removes a book from the books list
 # Parameters: book_title (string)
 # Return: Not needed for this function
-
+def check_out(book_title: str): 
+    try:
+        books.remove(book_title)
+    except ValueError:
+        pass
+#check_out('book_title')
 
 # 1.4 TODO: Check out 'THE POWER OF MOMENTS' using the check_out function
-
-
+# call check_out function and pass in argument
+check_out('THE POWER OF MOMENTS')
 # 1.5 TODO: Run the 'available_books' function again to see if the book was checked out
-
-
+available_books()
 print('-----------------------')
+
 # 1.6 TODO: Create a function 'check_in' that adds a book to the end of the books list
 # Parameters: book_title (string)
 # Return: Not needed for this function
+def check_in(book_title: str):
+    # book_title = input('What title are you checking in today?: ')
+    books.append(book_title)
+    # available_books()  
+#check_in('book_title')  
 
 
 # 1.7 TODO: Check in 'THE POWER OF MOMENTS' using the check_in function
-
-
 # 1.8 TODO: Run the 'available_books' function to see if the book was checked in
-
-
 print('-----------------------')
+
 # 1.9 TODO: Create a function 'search_by_name' that prints 'Available' if exists in books list, 'Not Available' if it doesn't.
 # Parameters: book_title (string)
 # Return: Not needed for this function
+def search_by_name(book_title: str):
+    # book_title = input('What title are you looking for today?: ')
+    try:
+        books.index(book_title)
+        print('Available') # code working but its printing both print statements
+    except ValueError:
+        print('Not Available')
 
-
+#search_by_name('book_title')
 # 1.10 TODO: Search for the book 'JUST MERCY'
-
-
 # 1.11 TODO: Search for the book '4000 WEEKS'
-
-
 # Here's the same list of books, with additional details
 
 books_with_details = [
@@ -124,22 +140,47 @@ books_with_details = [
 
 # 2.0 TODO: In a comment, describe the structure of the data in books_with_details.
 # What types of data are nested within others? How do you know?
+#S~ The list[], contains dictionaries {}, that containe key:value pairs. I can tell by looking at the syntax.
 
 
 # 2.1 TODO: Create a function called 'count_books' that returns the number of books in the books_with_details list
 # Parameters: Not needed for this function
 # Return: number of books (integer)
-
-
+def count_books():
+    num_books = len(books_with_details)
 # 2.2 TODO: Check the number of books available in the books list using the `count_books` function
 # HINT: Does `return` print anything out?
+    return num_books
+#count_books()
 
 
 # 2.3 TODO: Create a function 'search_by_author' that returns the titles of books by an author
 # Parameters - author (string)
 # Return - author's books (list of strings)
 # Hint - You will need a for loop, if statement, and .append() for this solution!
+#~S version saved about noon 10/4 shows a chat GPT rabbit hole! 
+# and will not be the final version. its incredibly clunky and still doesn't work.
+def search_by_author(author: str):
+    author_titles = []
+    for book in books_with_details:
+        book_author = book['author']
+
+        
+        if book_author == author:
+           author_titles.append(book["title"])
+        
+    return author_titles
+# author_name = input('Name of author: ')
+# author_titles = search_by_author(author_name)
+# if author_titles:
+#     print(f'{"author_name"} has the following titles in the library:')
+#     for title in author_titles:
+#         print(title)
+# else:
+#     print(f'No books found for {author_name}')
+# search_by_author(author_name)
 
 
 # 2.4 TODO: Search for book titles by the author 'Yuval Noah Harari' using the search_by_author function
 # HINT: Remember again-- return doesn't print anything out. How can we print the output of the function?
+
